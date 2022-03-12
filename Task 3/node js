@@ -1,0 +1,70 @@
+const customer = require("./controllers/customer")
+
+const yargs = require("yargs")
+
+yargs.command({
+command: "addCustomer",
+describe: "Add New Customer",
+builder: {
+    name: {
+        type: String,
+        length: 3,
+        requied: true
+    },
+
+    intialBalance: {
+        default: 1000
+    },
+
+    operation: {
+        defualt: []
+    }
+},
+
+handler: function(argv){
+    let customerData = {
+        name: argv.name,
+        intialBalance: argv.intialBalance,
+        remainingBalance: argv.remainingBalance,
+        operation: argv.operation
+    }
+
+    customer.addCustomer(customerData)
+}
+
+})
+
+yargs.command({
+    command: "addOp",
+    describe: "add an operation",
+    builder: {
+        accNumber: {
+            required: true,
+        },
+        
+        opType: {
+            requied: true,
+            type: String
+        },
+        
+        value: {
+            required: true,
+            type: Number
+        }
+    },
+
+    handler: function(argv){
+        let opData = {
+            accNumber: argv.accNumber,
+            opType: argv.opType,
+            value: argv.value,
+
+        }
+
+        customer.addOperation(opData)
+    }
+
+
+})
+
+yargs.argv
