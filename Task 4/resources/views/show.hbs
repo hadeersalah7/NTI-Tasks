@@ -1,0 +1,21 @@
+
+{{>header}}
+{{>nav}}
+<section class="my-5 container">
+    <div class="row mb-3 justifiy-content-end">
+        {{#if isEmpty}}
+ <div class="alert alert-danger">
+            Invalid User Id
+        </div>
+        {{else}}
+       
+        <div class="border border-success border-4 p-4 m-4">
+            <h3>Account Number: {{customer.id}}</h3>
+            <h3>Name: {{customer.name}}</h3>
+            <h3>Intial Balance: {{customer.intialBalance}}</h3>
+            <h3>Remaining Balance: {{customer.remaining}}</h3>
+        </div>
+        {{/if}}
+    </div>
+</section>
+{{>footer}}

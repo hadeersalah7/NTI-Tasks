@@ -1,0 +1,23 @@
+{{>header}}
+{{>nav}}
+
+
+<section class="container">
+
+    <form>
+<input type="text" placeholder="Account Number" value="{{customer.id}}" disabled><br><br>
+
+<input type="text" name="name" placeholder="Name" value = "{{customer.name}}"><br><br>
+
+<input type="text" name="intialBalance" placeholder="Intial Balance" value = "{{customer.intialBalance}}"><br><br>
+
+<input type="text" name="remaining" placeholder="Remaining Balance" value = "{{customer.remaining}}"><br><br>
+
+<button class="btn btn-primary">Add Customer</button>
+
+    </form>
+    
+</section>
+
+
+{{>footer}}
