@@ -5,10 +5,10 @@ const ObjectId = require("mongodb").ObjectId
 const showAll = (req, res) => {
     db((err,connection) => {
     
-    connection.collection("user").find().toArray((e, users) => {
+    connection.collection("customer").find().toArray((e, users) => {
         if(e) res.send(e)
         res.render("showAll", {
-        pageTitle: "Show All Users", users,
+        pageTitle: "Show All Customers", users,
         isEmpty: users.length ==0 ? true : false
     })
     })
@@ -21,7 +21,7 @@ const showAll = (req, res) => {
 const show = (req,res)=>{
     let customerId = req.params.id
     db((err, connection) => {
-        connection.collection("user").findOne({_id: new ObjectId(customerId) }, 
+        connection.collection("customer").findOne({_id: new ObjectId(customerId) }, 
         (e, result) => {
             res.render("show", {
         pageTitle:"User Data", 
@@ -48,7 +48,7 @@ const addCustomer = (req,res)=>{
 const addLogic = (req, res) => {
     let customer = {...req.body}
 db((err, connection) => {
-connection.collection("user").insertOne(req.body, (err, result) => {
+connection.collection("customer").insertOne(req.body, (err, result) => {
     if(err) res.send(err) 
     res.redirect("/")
 })
@@ -59,7 +59,7 @@ connection.collection("user").insertOne(req.body, (err, result) => {
 const editUser = (req,res)=>{
     let userId = req.params.id
     db((err, connection) => {
-        connection.collection("user").findOne({_id: new ObjectId(userId) }, 
+        connection.collection("customer").findOne({_id: new ObjectId(userId) }, 
         (e, result) => {
             res.render("edit", {
         pageTitle:"Edit User", 
@@ -76,7 +76,7 @@ const editUser = (req,res)=>{
 const editLogic = (req, res) => {
     db((err, connection)=> {
         if(err) res.send(err)
-        connection.collection("user").updateOne(
+        connection.collection("customer").updateOne(
             {_id : new ObjectId(req.params.id)},
             {$set: req.body}
         ) 
@@ -90,7 +90,7 @@ const editLogic = (req, res) => {
 const deleteUser = (req,res)=>{
     let userId = req.params.id
     db((err, connection) => {
-    connection.collection("user").deleteOne({ _id : new ObjectId (userId)})
+    connection.collection("customer").deleteOne({ _id : new ObjectId (userId)})
     .then (() => res.redirect("/"))
     .catch (e => res.send(e))
     })
@@ -109,7 +109,7 @@ const addOp = (req, res) => {
 const addOpLogic = (req, res) => {
 
     db((err, connection) => {
-        connection.collection("user").insertOne(req.body, (err, result) => {
+        connection.collection("customer").insertOne(req.body, (err, result) => {
             if(err) res.send(err) 
             res.redirect("/")
         })
